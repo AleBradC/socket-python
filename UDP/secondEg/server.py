@@ -5,10 +5,12 @@ socket.bind(("0.0.0.0", 7777))
 
 firstNumber, clientAddress = socket.recvfrom(10)
 secondNumber, clientAddress = socket.recvfrom(10)
-print(firstNumber.decode())
-print(secondNumber.decode())
+firstNumber = firstNumber.decode()
+secondNumber = secondNumber.decode()
 
-serverMsg = firstNumber + secondNumber
-socket.sendto(str.encode(serverMsg), clientAddress) 
+result = int(firstNumber) + int(secondNumber)
+serverMsg = str(result).encode()
+
+socket.sendto(serverMsg, clientAddress)
 
 socket.close()
